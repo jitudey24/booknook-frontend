@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import {
@@ -19,6 +20,8 @@ import {
 } from "lucide-react";
 
 import { authClient } from "@/lib/auth-client";
+
+import ThemeToggle from "@/components/layout/ThemeToggle";
 
 const publicLinks = [
   {
@@ -128,9 +131,15 @@ export default function Navbar() {
             onClick={closeMenus}
             className="group flex shrink-0 items-center gap-3"
           >
-            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-emerald-600 text-white shadow-lg shadow-emerald-600/20 transition-transform duration-200 group-hover:scale-105">
-              <BookOpen size={25} strokeWidth={2.2} />
-            </div>
+            <Image
+              src="/images/logo.jpg"
+              alt="BookNook logo"
+              width={1408}
+              height={768}
+              loading="eager"
+              sizes="44px"
+              className="h-11 w-11 shrink-0 rounded-2xl object-cover object-center shadow-lg shadow-emerald-600/20 transition-transform duration-200 group-hover:scale-105"
+            />
 
             <div>
               <h1 className="text-2xl font-extrabold tracking-tight text-slate-900">
@@ -151,6 +160,8 @@ export default function Navbar() {
 
           {/* Desktop Auth Section */}
           <div className="hidden shrink-0 items-center gap-3 lg:flex">
+            <ThemeToggle />
+
             {isPending ? (
               <div className="h-10 w-24 animate-pulse rounded-full bg-slate-100" />
             ) : isLoggedIn ? (
@@ -239,15 +250,19 @@ export default function Navbar() {
             )}
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            type="button"
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 text-slate-700 transition hover:bg-emerald-50 lg:hidden"
-            aria-label="Toggle navigation menu"
-          >
-            {menuOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
+          {/* Theme Toggle + Mobile Menu Button */}
+          <div className="flex shrink-0 items-center gap-2 lg:hidden">
+            <ThemeToggle />
+
+            <button
+              type="button"
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 text-slate-700 transition hover:bg-emerald-50"
+              aria-label="Toggle navigation menu"
+            >
+              {menuOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}

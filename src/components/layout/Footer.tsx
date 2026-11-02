@@ -1,3 +1,4 @@
+
 import Link from "next/link";
 import {
   BookOpen,
@@ -54,10 +55,13 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-  <footer className="mt-auto bg-slate-950 text-slate-300">
+    <footer className="mt-auto bg-slate-950 text-slate-300">
       <div className="mx-auto max-w-7xl px-4 pb-12 pt-16 sm:px-6 lg:px-8">
-        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
-          {/* Brand */}
+
+        {/* Three Column Layout */}
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-10">
+
+          {/* 1. Brand */}
           <div>
             <Link href="/" className="inline-flex items-center gap-3">
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500 text-white">
@@ -97,9 +101,11 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* 2. Quick Links */}
           <div>
-            <h3 className="mb-6 text-base font-bold text-white">Quick Links</h3>
+            <h3 className="mb-6 text-base font-bold text-white">
+              Quick Links
+            </h3>
 
             <ul className="space-y-4">
               {quickLinks.map((link) => (
@@ -119,29 +125,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Explore */}
-          {/* <div>
-            <h3 className="mb-6 text-base font-bold text-white">Explore</h3>
-
-            <ul className="space-y-4">
-              {supportLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="group inline-flex items-center gap-2 text-sm text-slate-400 transition hover:text-emerald-400"
-                  >
-                    <ArrowUpRight
-                      size={14}
-                      className="transition group-hover:translate-x-1"
-                    />
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div> */}
-
-          {/* Contact */}
+          {/* 3. Contact */}
           <div>
             <h3 className="mb-6 text-base font-bold text-white">
               Get in Touch
@@ -153,7 +137,10 @@ export default function Footer() {
 
             <ul className="space-y-5">
               <li className="flex items-start gap-3">
-                <Mail size={18} className="mt-0.5 shrink-0 text-emerald-400" />
+                <Mail
+                  size={18}
+                  className="mt-0.5 shrink-0 text-emerald-400"
+                />
                 <a
                   href="mailto:hello@booknook.com"
                   className="text-sm text-slate-400 transition hover:text-emerald-400"
@@ -163,7 +150,10 @@ export default function Footer() {
               </li>
 
               <li className="flex items-start gap-3">
-                <Phone size={18} className="mt-0.5 shrink-0 text-emerald-400" />
+                <Phone
+                  size={18}
+                  className="mt-0.5 shrink-0 text-emerald-400"
+                />
                 <a
                   href="tel:+8801000000000"
                   className="text-sm text-slate-400 transition hover:text-emerald-400"
@@ -177,10 +167,13 @@ export default function Footer() {
                   size={18}
                   className="mt-0.5 shrink-0 text-emerald-400"
                 />
-                <span className="text-sm text-slate-400">Bangladesh</span>
+                <span className="text-sm text-slate-400">
+                  Bangladesh
+                </span>
               </li>
             </ul>
           </div>
+
         </div>
       </div>
 
@@ -193,7 +186,10 @@ export default function Footer() {
 
           <p className="flex items-center gap-1.5 text-xs text-slate-500">
             Made with
-            <Heart size={13} className="fill-emerald-500 text-emerald-500" />
+            <Heart
+              size={13}
+              className="fill-emerald-500 text-emerald-500"
+            />
             for book lovers.
           </p>
         </div>
@@ -201,3 +197,4 @@ export default function Footer() {
     </footer>
   );
 }
+

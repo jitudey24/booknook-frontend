@@ -84,37 +84,204 @@
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
+  /* ---- Semantic tokens: deep navy surfaces, soft-white text (no pure black) ---- */
+  --background: #0a1020;
+  --foreground: #e6ebf4;
+  --card: #131a2b;
+  --card-foreground: #e6ebf4;
+  --popover: #131a2b;
+  --popover-foreground: #e6ebf4;
   --primary: oklch(0.922 0 0);
   --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
+  --secondary: #1a2338;
+  --secondary-foreground: #e6ebf4;
+  --muted: #1a2338;
+  --muted-foreground: #8494ab;
+  --accent: #1a2338;
+  --accent-foreground: #e6ebf4;
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
+  --border: #2a3550;
+  --input: #2a3550;
+  --ring: #4c7de0;
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar: #131a2b;
+  --sidebar-foreground: #e6ebf4;
   --sidebar-primary: oklch(0.488 0.243 264.376);
   --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --sidebar-accent: #1a2338;
+  --sidebar-accent-foreground: #e6ebf4;
+  --sidebar-border: #2a3550;
+  --sidebar-ring: #4c7de0;
+
+  /*
+   * Palette remap — Tailwind compiles every color utility to var(--color-*),
+   * so redefining the palette under `.dark` flips the whole site centrally.
+   * Tokens that act as text in light mode switch to dark-safe values here;
+   * dual-use tokens are patched with the `.dark .utility` repair rules below.
+   */
+  --color-white: #131a2b;
+
+  --color-slate-50: #0a1020;
+  --color-slate-100: #1a2338;
+  --color-slate-200: #2a3550;
+  --color-slate-300: #3b4a6b;
+  --color-slate-500: #a8b3c5;
+  --color-slate-600: #c3cddc;
+  --color-slate-700: #dde5ef;
+  --color-slate-800: #eef2f7;
+  /* slate-400 (muted text), slate-900 (shadows/rings/text repaired below), slate-950 (footer) unchanged */
+
+  --color-gray-50: #0a1020;
+  --color-gray-100: #1a2338;
+  --color-gray-200: #2a3550;
+  --color-gray-300: #3b4a6b;
+  --color-gray-500: #9aa7bb;
+  --color-gray-600: #c3cddc;
+  --color-gray-700: #dde5ef;
+  --color-gray-800: #eef2f7;
+  --color-gray-900: #f8fafc;
+
+  --color-emerald-50: #062a20;
+  --color-emerald-100: #0d3f30;
+  --color-emerald-800: #a7f3d0;
+  --color-emerald-900: #d1fae5;
+  /* emerald-600/700 keep brand values for filled buttons and gradients; their text usage is repaired below */
+
+  --color-red-50: #2e1419;
+  --color-red-100: #3f1c22;
+  --color-red-200: #6b2b35;
+  /* red-600 stays for destructive buttons; its text usage is repaired below */
+
+  --color-blue-50: #0d1b33;
+  --color-blue-100: #152745;
+  --color-blue-600: #60a5fa;
+  --color-blue-700: #93c5fd;
+  --color-blue-800: #bfdbfe;
+
+  --color-amber-50: #2b2109;
+  --color-amber-700: #fcd34d;
+
+  --color-purple-50: #1c1338;
+  --color-rose-50: #2e1321;
+  --color-orange-50: #2c1a0a;
+}
+
+/*
+ * Dark-mode repair rules for dual-use tokens.
+ * These live outside @layer, so they always beat Tailwind's layered utilities.
+ */
+/* White is remapped to the dark card surface — text and borders that must stay light: */
+.dark .text-white {
+  color: #f8fafc;
+}
+
+.dark .text-white\/70 {
+  color: rgb(248 250 252 / 0.7);
+}
+
+.dark .hover\:text-white:hover {
+  color: #f8fafc;
+}
+
+.dark .border-white\/30 {
+  border-color: rgb(248 250 252 / 0.3);
+}
+
+.dark .bg-white\/10 {
+  background-color: rgb(248 250 252 / 0.1);
+}
+
+.dark .bg-white\/15 {
+  background-color: rgb(248 250 252 / 0.15);
+}
+
+/* Light text on hero imagery, in the footer, and for page headings: */
+.dark .text-slate-200 {
+  color: #e2e8f0;
+}
+
+.dark .text-slate-300 {
+  color: #cbd5e1;
+}
+
+.dark .text-slate-900 {
+  color: #f8fafc;
+}
+
+/* Footer borders stay dark on the always-dark footer: */
+.dark .border-slate-700 {
+  border-color: #334155;
+}
+
+.dark .border-slate-800 {
+  border-color: #1e293b;
+}
+
+/* Emerald text lightens on dark surfaces (backgrounds keep the brand green): */
+.dark .text-emerald-600 {
+  color: #34d399;
+}
+
+.dark .text-emerald-700 {
+  color: #6ee7b7;
+}
+
+.dark .hover\:text-emerald-700:hover {
+  color: #6ee7b7;
+}
+
+.dark .group:hover .group-hover\:text-emerald-700 {
+  color: #6ee7b7;
+}
+
+/* Emerald-100 becomes a dark tint for badges, so its text usage flips back to light: */
+.dark .text-emerald-100 {
+  color: #d1fae5;
+}
+
+.dark .text-emerald-100\/80 {
+  color: rgb(209 250 229 / 0.8);
+}
+
+/* Error text stays readable on dark cards: */
+.dark .text-red-600 {
+  color: #f87171;
+}
+
+/* The focus ring resolves through the remapped emerald-100 var — give it a visible glow instead: */
+.dark .focus\:ring-emerald-100:focus {
+  --tw-ring-color: rgb(52 211 153 / 0.3);
+}
+
+/* react-hot-toast injects `background: #fff` with single-class specificity: */
+.dark .bn-toast {
+  background: #131a2b !important;
+  color: #e6ebf4 !important;
+  border: 1px solid #2a3550;
+  box-shadow: 0 10px 24px -6px rgb(0 0 0 / 0.5);
+}
+
+/*
+ * Smooth theme crossfade. The helper class is added to <html> only while a
+ * user-initiated switch is animating (see applyThemeAnimated), so everyday
+ * hover transitions keep their own durations and first paint is unaffected.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  html.bn-theme-transition,
+  html.bn-theme-transition *,
+  html.bn-theme-transition *::before,
+  html.bn-theme-transition *::after {
+    transition:
+      background-color 300ms ease,
+      border-color 300ms ease,
+      color 300ms ease,
+      box-shadow 300ms ease,
+      fill 300ms ease;
+  }
 }
 
 @layer base {

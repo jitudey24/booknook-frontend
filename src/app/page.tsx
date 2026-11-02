@@ -52,8 +52,7 @@ const slides = [
     description:
       "Discover your next favorite read from our growing collection of books. Your reading journey starts here.",
     button: "Browse Books",
-    image:
-      "https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1000",
+    image: "/images/sliderImg1.jpg",
   },
   {
     tag: "EXPLORE YOUR NEXT READ",
@@ -61,8 +60,7 @@ const slides = [
     description:
       "Explore different genres, discover new authors, and find books that match your interests.",
     button: "Explore Collection",
-    image:
-      "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=1000",
+    image: "/images/sliderImg2.jpg",
   },
   {
     tag: "READ MORE, DISCOVER MORE",
@@ -70,8 +68,7 @@ const slides = [
     description:
       "Make time for great stories, fresh ideas, and knowledge that stays with you.",
     button: "Start Exploring",
-    image:
-      "https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=1000",
+    image: "/images/sliderImg3.jpg",
   },
 ];
 
@@ -156,60 +153,69 @@ export default function Home() {
         <section className="mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8">
           <div className="relative overflow-hidden rounded-3xl">
             <Swiper
-            modules={[Autoplay, Pagination, Navigation]}
-            slidesPerView={1}
-            loop
-            autoplay={{
-              delay: 4500,
-              disableOnInteraction: false,
-            }}
-            pagination={{ clickable: true }}
-            navigation
-            className="home-hero-swiper"
-          >
-            {slides.map((slide, index) => (
-              <SwiperSlide key={slide.title}>
-                <div
-                  className="relative flex min-h-[440px] items-center bg-cover bg-center px-7 py-16 sm:min-h-[500px] sm:px-14 lg:px-20"
-                  style={{
-                    backgroundImage: `linear-gradient(to right, ${
-                      index === 0
-                        ? "rgba(2, 6, 23, .94), rgba(15, 23, 42, .45)"
-                        : index === 1
-                          ? "rgba(30, 27, 75, .94), rgba(49, 46, 129, .35)"
-                          : "rgba(2, 44, 34, .94), rgba(6, 78, 59, .35)"
-                    }), url("${slide.image}")`,
-                  }}
-                >
-                  <div className="relative z-10 max-w-2xl pb-8 text-white">
-                    <span className="mb-5 inline-flex rounded-full border border-white/30 bg-white/10 px-4 py-2 text-xs font-semibold tracking-[0.2em] text-emerald-200 backdrop-blur">
-                      {slide.tag}
-                    </span>
+              modules={[Autoplay, Pagination, Navigation]}
+              slidesPerView={1}
+              loop
+              autoplay={{
+                delay: 4500,
+                disableOnInteraction: false,
+              }}
+              pagination={{ clickable: true }}
+              navigation
+              className="home-hero-swiper"
+            >
+              {slides.map((slide, index) => (
+                <SwiperSlide key={slide.title}>
+                  <div className="relative flex min-h-[440px] items-center overflow-hidden px-7 py-16 sm:min-h-[500px] sm:px-14 lg:px-20">
+                    <Image
+                      src={slide.image}
+                      alt=""
+                      fill
+                      loading={index === 0 ? "eager" : "lazy"}
+                      sizes="(max-width: 1279px) 100vw, 1216px"
+                      className="object-cover"
+                    />
 
-                    <h1 className="mb-5 text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
-                      {slide.title}
-                    </h1>
+                    <div
+                      className="absolute inset-0"
+                      style={{
+                        backgroundImage: `linear-gradient(
+      to right,
+      rgba(2, 6, 23, 0.82),
+      rgba(15, 23, 42, 0.35)
+    )`,
+                      }}
+                    />
 
-                    <p className="mb-8 max-w-xl text-base leading-8 text-slate-200 sm:text-lg">
-                      {slide.description}
-                    </p>
+                    <div className="relative z-10 max-w-2xl pb-8 text-white">
+                      <span className="mb-5 inline-flex rounded-full border border-white/30 bg-white/10 px-4 py-2 text-xs font-semibold tracking-[0.2em] text-emerald-200 backdrop-blur">
+                        {slide.tag}
+                      </span>
 
-                    <Link
-                      href="/books"
-                      className="inline-flex items-center gap-3 rounded-xl bg-emerald-500 px-7 py-4 font-semibold text-white shadow-lg transition hover:bg-emerald-600"
-                    >
-                      {slide.button}
-                      <span aria-hidden="true">→</span>
-                    </Link>
+                      <h1 className="mb-5 text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
+                        {slide.title}
+                      </h1>
+
+                      <p className="mb-8 max-w-xl text-base leading-8 text-slate-200 sm:text-lg">
+                        {slide.description}
+                      </p>
+
+                      <Link
+                        href="/books"
+                        className="inline-flex items-center gap-3 rounded-xl bg-emerald-500 px-7 py-4 font-semibold text-white shadow-lg transition hover:bg-emerald-600"
+                      >
+                        {slide.button}
+                        <span aria-hidden="true">→</span>
+                      </Link>
+                    </div>
+
+                    <div className="absolute bottom-8 right-8 hidden text-sm font-medium text-white/70 sm:block">
+                      0{index + 1} / 03
+                    </div>
                   </div>
-
-                  <div className="absolute bottom-8 right-8 hidden text-sm font-medium text-white/70 sm:block">
-                    0{index + 1} / 03
-                  </div>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+                </SwiperSlide>
+              ))}
+            </Swiper>
           </div>
         </section>
       </Suspense>
@@ -220,8 +226,8 @@ export default function Home() {
       ===================================== */}
 
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <div className="mb-10 flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
-          <div>
+        <div className="mb-10 flex flex-col items-center gap-5 text-center">
+          <div className="w-full">
             <span className="mb-3 block text-sm font-bold uppercase tracking-[0.2em] text-emerald-600">
               Fresh From Our Library
             </span>
@@ -230,18 +236,18 @@ export default function Home() {
               New Arrivals
             </h2>
 
-            <p className="mt-3 max-w-xl text-slate-500">
+            <p className="mx-auto mt-3 max-w-xl text-slate-500">
               Explore the latest additions to our collection and find your next
               favorite book.
             </p>
           </div>
 
-          <Link
+          {/* <Link
             href="/books"
             className="inline-flex items-center gap-2 font-semibold text-emerald-700 transition hover:text-emerald-900"
           >
             See All Books <span aria-hidden="true">→</span>
-          </Link>
+          </Link> */}
         </div>
 
         {/* BOOK LOADING / ERROR / EMPTY / DATA */}
