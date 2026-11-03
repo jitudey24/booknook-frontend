@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 
 import { authClient } from "@/lib/auth-client";
+import Image from "next/image";
 
 export default function ProfilePage() {
   const router = useRouter();
@@ -93,10 +94,12 @@ export default function ProfilePage() {
         <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl shadow-slate-200/50">
           <div className="flex flex-col items-center gap-5 border-b border-slate-100 bg-gradient-to-r from-emerald-700 to-teal-700 px-6 py-10 text-center sm:flex-row sm:gap-6 sm:px-10 sm:text-left">
             {userImage ? (
-              <img
-                src={userImage}
-                alt={userName}
-                className="h-20 w-20 rounded-full border-4 border-white/30 object-cover shadow-lg"
+              <Image
+                src={session?.user?.image}
+                alt="User profile"
+                width={40}
+                height={40}
+                className="rounded-full object-cover"
               />
             ) : (
               <div className="flex h-20 w-20 items-center justify-center rounded-full border-4 border-white/30 bg-white/15 text-white shadow-lg">

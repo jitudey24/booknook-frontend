@@ -1,7 +1,7 @@
 
+import Image from "next/image";
 import Link from "next/link";
 import {
-  BookOpen,
   Mail,
   Phone,
   MapPin,
@@ -22,13 +22,6 @@ const quickLinks = [
   { name: "Add Book", href: "/add-book" },
   { name: "My Books", href: "/my-books" },
 ];
-
-// const supportLinks = [
-//   { name: "My Borrows", href: "/my-borrows" },
-//   { name: "My Profile", href: "/profile" },
-//   { name: "Login", href: "/login" },
-//   { name: "Register", href: "/register" },
-// ];
 
 const socialLinks = [
   {
@@ -63,10 +56,18 @@ export default function Footer() {
 
           {/* 1. Brand */}
           <div>
-            <Link href="/" className="inline-flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500 text-white">
-                <BookOpen size={27} />
-              </div>
+            <Link
+              href="/"
+              className="group inline-flex items-center gap-3"
+            >
+              <Image
+                src="/images/logo.jpg"
+                alt="BookNook logo"
+                width={1408}
+                height={768}
+                sizes="(max-width: 640px) 44px, 48px"
+                className="h-11 w-11 shrink-0 rounded-2xl object-cover object-center shadow-lg shadow-emerald-600/20 ring-1 ring-white/10 transition-transform duration-200 group-hover:scale-105 sm:h-12 sm:w-12"
+              />
 
               <span className="text-2xl font-extrabold tracking-tight text-white">
                 Book<span className="text-emerald-400">Nook</span>

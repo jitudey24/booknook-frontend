@@ -1,10 +1,15 @@
 "use client";
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
+
 import { useRouter } from "next/navigation";
+
 import { authClient } from "@/lib/auth-client";
+
 import axios from "axios";
+
 import toast from "react-hot-toast";
+
 import {
   BookPlus,
   Image as ImageIcon,
@@ -25,6 +30,7 @@ const baseUrl = (
 const imgbbApiKey = process.env.NEXT_PUBLIC_IMGBB_API_KEY || "";
 
 // Get JWT token from BetterAuth
+
 const getAuthHeaders = async () => {
   const { data, error } = await authClient.token();
 
@@ -45,26 +51,29 @@ export default function AddBookPage() {
   const { data: session, isPending } = authClient.useSession();
 
   const [loading, setLoading] = useState(false);
+
   const [uploading, setUploading] = useState(false);
 
   const [totalCopies, setTotalCopies] = useState("1");
 
-  const [imageUrl, setImageUrl] = useState(
-    "https://i.postimg.cc/SR5rgwsk/images.jpg",
-  );
+  const [imageUrl, setImageUrl] = useState("");
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [formData, setFormData] = useState({
     title: "",
+
     author: "",
+
     category: "",
+
     description: "",
   });
 
   const user = session?.user;
 
   // Redirect unauthenticated users
+
   useEffect(() => {
     if (!isPending && !user) {
       router.replace("/login?redirect=/add-book");
@@ -72,6 +81,7 @@ export default function AddBookPage() {
   }, [isPending, user, router]);
 
   // Handle input changes
+
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -81,26 +91,32 @@ export default function AddBookPage() {
 
     setFormData((previous) => ({
       ...previous,
+
       [name]: value,
     }));
   };
 
   // Handle image upload to imgbb
+
   const handleImageUpload = async (file: File) => {
     if (!imgbbApiKey) {
       toast.error(
         "Image upload is not configured. Please paste an image URL instead.",
       );
+
       return;
     }
 
-    if (!file.type.startsWith("image/")) {
-      toast.error("Please choose an image file (JPG, PNG, WebP).");
+    const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
+
+    if (!allowedTypes.includes(file.type)) {
+      toast.error("Please choose a JPG, PNG, or WebP image.");
       return;
     }
 
     if (file.size > 8 * 1024 * 1024) {
       toast.error("Image must be smaller than 8MB.");
+
       return;
     }
 
@@ -108,10 +124,12 @@ export default function AddBookPage() {
       setUploading(true);
 
       const formData = new FormData();
+
       formData.append("image", file);
 
       const response = await axios.post(
         `https://api.imgbb.com/1/upload?key=${imgbbApiKey}`,
+
         formData,
       );
 
@@ -122,9 +140,11 @@ export default function AddBookPage() {
       }
 
       setImageUrl(uploadUrl);
+
       toast.success("Image uploaded successfully!");
     } catch (error) {
       console.error("Image upload error:", error);
+
       toast.error("Image upload failed. Please try again.");
     } finally {
       setUploading(false);
@@ -136,38 +156,47 @@ export default function AddBookPage() {
   };
 
   // Handle form submission
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!user) {
       toast.error("Please login first.");
+
       router.push("/login?redirect=/add-book");
+
       return;
     }
 
     const trimmedImageUrl = imageUrl.trim();
+
     const copies = Number(totalCopies);
 
     if (!trimmedImageUrl) {
       toast.error("Please enter a book image URL.");
+
       return;
     }
 
     // Validate image URL
+
     try {
       const parsedUrl = new URL(trimmedImageUrl);
 
       if (parsedUrl.protocol !== "https:") {
         toast.error("Please enter a valid HTTPS image URL.");
+
         return;
       }
     } catch {
       toast.error("Please enter a valid image URL.");
+
       return;
     }
 
     if (!Number.isInteger(copies) || copies < 1) {
       toast.error("Total copies must be at least 1.");
+
       return;
     }
 
@@ -175,17 +204,23 @@ export default function AddBookPage() {
       setLoading(true);
 
       // Get JWT authorization headers
+
       const headers = await getAuthHeaders();
 
       // Prepare book data
+
       // User identity will be taken from the verified JWT on the backend.
+
       const bookData = {
         ...formData,
+
         image: trimmedImageUrl,
+
         totalCopies: copies,
       };
 
       // Save book to MongoDB
+
       const response = await axios.post(`${baseUrl}/books`, bookData, {
         headers,
       });
@@ -194,14 +229,19 @@ export default function AddBookPage() {
         toast.success("Book added successfully!");
 
         // Reset form
+
         setFormData({
           title: "",
+
           author: "",
+
           category: "",
+
           description: "",
         });
 
         setImageUrl("");
+
         setTotalCopies("1");
 
         router.refresh();
@@ -213,7 +253,9 @@ export default function AddBookPage() {
 
       if (axios.isAxiosError(error) && error.response?.status === 401) {
         toast.error("Your session has expired. Please login again.");
+
         router.replace("/login?redirect=/add-book");
+
         return;
       }
 
@@ -234,6 +276,7 @@ export default function AddBookPage() {
   };
 
   // Loading state
+
   if (isPending || !user) {
     return (
       <div className="flex min-h-[60vh] items-center justify-center">
@@ -246,6 +289,7 @@ export default function AddBookPage() {
     <section className="px-4 py-12 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-3xl">
         {/* Heading */}
+
         <div className="mb-8 text-center">
           <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-100 text-emerald-700">
             <BookPlus size={32} />
@@ -261,9 +305,11 @@ export default function AddBookPage() {
         </div>
 
         {/* Form Card */}
+
         <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-xl shadow-slate-200/50 sm:p-8">
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Book Title */}
+
             <div>
               <label
                 htmlFor="title"
@@ -286,6 +332,7 @@ export default function AddBookPage() {
             </div>
 
             {/* Author */}
+
             <div>
               <label
                 htmlFor="author"
@@ -308,6 +355,7 @@ export default function AddBookPage() {
             </div>
 
             {/* Category */}
+
             <div>
               <label
                 htmlFor="category"
@@ -335,6 +383,7 @@ export default function AddBookPage() {
             </div>
 
             {/* Book Image URL */}
+
             <div>
               <div className="mb-2 flex items-center justify-between gap-3">
                 <label
@@ -366,7 +415,7 @@ export default function AddBookPage() {
                 <input
                   ref={fileInputRef}
                   type="file"
-                  accept="image/*"
+                  accept="image/jpeg,image/png,image/webp"
                   className="hidden"
                   onChange={(e) => {
                     const file = e.target.files?.[0];
@@ -389,7 +438,7 @@ export default function AddBookPage() {
                   type="url"
                   value={imageUrl}
                   onChange={(e) => setImageUrl(e.target.value)}
-                  placeholder="Paste your Postimages direct link"
+                  placeholder="Paste your book cover image URL here..."
                   required
                   className="w-full rounded-xl border border-slate-200 bg-slate-50 py-3 pl-10 pr-4 text-sm outline-none transition focus:border-emerald-500 focus:bg-white focus:ring-4 focus:ring-emerald-500/10"
                 />
@@ -400,6 +449,7 @@ export default function AddBookPage() {
               </p>
 
               {/* Image Preview */}
+
               {uploading ? (
                 <div className="mt-4 flex items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-slate-50 p-6 text-xs font-semibold text-slate-500">
                   <Loader2
@@ -427,6 +477,7 @@ export default function AddBookPage() {
             </div>
 
             {/* Total Copies */}
+
             <div>
               <label
                 htmlFor="totalCopies"
@@ -461,6 +512,7 @@ export default function AddBookPage() {
             </div>
 
             {/* Description */}
+
             <div>
               <label
                 htmlFor="description"
@@ -483,6 +535,7 @@ export default function AddBookPage() {
             </div>
 
             {/* User Information */}
+
             <div className="rounded-2xl border border-emerald-100 bg-emerald-50/70 p-5">
               <h2 className="mb-4 flex items-center gap-2 text-sm font-bold text-emerald-800">
                 <UserRound size={18} />
@@ -541,9 +594,10 @@ export default function AddBookPage() {
             </div>
 
             {/* Submit Button */}
+
             <button
               type="submit"
-              disabled={loading}
+              disabled={loading || uploading}
               className="flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 px-6 py-4 text-sm font-bold text-white shadow-lg shadow-emerald-600/20 transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-60"
             >
               {loading ? (

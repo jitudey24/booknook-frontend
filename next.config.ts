@@ -2,13 +2,13 @@ import type { NextConfig } from "next";
 import { PHASE_DEVELOPMENT_SERVER } from "next/constants";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   experimental: {
     agentFeedback: true,
   },
   cacheComponents: true,
   partialPrefetching: true,
   reactCompiler: true,
+
   images: {
     remotePatterns: [
       {
@@ -20,8 +20,14 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "i.postimg.cc",
       },
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+        pathname: "/**",
+      },
     ],
   },
+
   turbopack: {
     rules: {
       "*.css": {
@@ -38,12 +44,6 @@ export default function loadConfig(phase: string): NextConfig {
       ...nextConfig,
       images: {
         ...nextConfig.images,
-        /* Next 16 caches optimized images on disk keyed only by URL
-           (`.next/dev/cache/images`) and does not revalidate them until
-           `images.minimumCacheTTL` expires — 4 hours by default. Replacing a
-           file in `public/images` therefore keeps serving the OLD optimized
-           copy for hours. Disabling the disk cache in dev makes replaced
-           images show up immediately; production keeps the default caching. */
         maximumDiskCacheSize: 0,
       },
     };

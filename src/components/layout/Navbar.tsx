@@ -174,9 +174,11 @@ export default function Navbar() {
                   aria-label="Open profile menu"
                 >
                   {userImage ? (
-                    <img
+                    <Image
                       src={userImage}
                       alt={userName}
+                      width={40}
+                      height={40}
                       className="h-9 w-9 rounded-full object-cover"
                     />
                   ) : (

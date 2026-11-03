@@ -180,10 +180,10 @@ export default function Home() {
                       className="absolute inset-0"
                       style={{
                         backgroundImage: `linear-gradient(
-      to right,
-      rgba(2, 6, 23, 0.82),
-      rgba(15, 23, 42, 0.35)
-    )`,
+                        to right,
+                        rgba(2, 6, 23, 0.82),
+                        rgba(15, 23, 42, 0.35)
+                      )`,
                       }}
                     />
 
@@ -241,13 +241,6 @@ export default function Home() {
               favorite book.
             </p>
           </div>
-
-          {/* <Link
-            href="/books"
-            className="inline-flex items-center gap-2 font-semibold text-emerald-700 transition hover:text-emerald-900"
-          >
-            See All Books <span aria-hidden="true">→</span>
-          </Link> */}
         </div>
 
         {/* BOOK LOADING / ERROR / EMPTY / DATA */}
