@@ -95,7 +95,7 @@ export default function ProfilePage() {
           <div className="flex flex-col items-center gap-5 border-b border-slate-100 bg-gradient-to-r from-emerald-700 to-teal-700 px-6 py-10 text-center sm:flex-row sm:gap-6 sm:px-10 sm:text-left">
             {userImage ? (
               <Image
-                src={session?.user?.image}
+                src={session.user.image || "/images/default-avatar.png"}
                 alt="User profile"
                 width={40}
                 height={40}
