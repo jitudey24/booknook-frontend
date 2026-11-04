@@ -218,13 +218,13 @@ export default function MyBorrowsPage() {
   // Loading state
   if (isPending || !user || loading) {
     return (
-      <div className="flex min-h-[65vh] flex-col items-center justify-center">
-        <Loader2 size={40} className="animate-spin text-emerald-600" />
+      // <div className="flex min-h-[65vh] flex-col items-center justify-center">
+      //   <Loader2 size={40} className="animate-spin text-emerald-600" />
 
-        <p className="mt-4 text-sm font-medium text-slate-500">
-          Loading your borrowed books...
-        </p>
-      </div>
+      //   <p className="mt-4 text-sm font-medium text-slate-500">
+      //     Loading your borrowed books...
+      //   </p>
+      // </div>
     );
   }
 
