@@ -152,7 +152,7 @@ export default function Home() {
       >
         <section className="mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8">
           <div className="relative overflow-hidden rounded-3xl">
-            <Swiper
+            {/* <Swiper
               modules={[Autoplay, Pagination, Navigation]}
               slidesPerView={1}
               loop
@@ -215,7 +215,7 @@ export default function Home() {
                   </div>
                 </SwiperSlide>
               ))}
-            </Swiper>
+            </Swiper> */}
           </div>
         </section>
       </Suspense>
