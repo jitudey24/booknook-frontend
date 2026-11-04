@@ -88,7 +88,6 @@ const getAuthHeaders = async () => {
       error?.message || "Authentication token not found. Please login again.",
     );
   }
-
   return {
     Authorization: `Bearer ${data.token}`,
   };
