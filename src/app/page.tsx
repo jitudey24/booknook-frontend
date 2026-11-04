@@ -227,7 +227,7 @@ export default function Home() {
 
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <div className="mb-10 flex flex-col items-center gap-5 text-center">
-          {/* <div className="w-full">
+          <div className="w-full">
             <span className="mb-3 block text-sm font-bold uppercase tracking-[0.2em] text-emerald-600">
               Fresh From Our Library
             </span>
@@ -240,7 +240,7 @@ export default function Home() {
               Explore the latest additions to our collection and find your next
               favorite book.
             </p>
-          </div> */}
+          </div>
         </div>
 
         {/* BOOK LOADING / ERROR / EMPTY / DATA */}
