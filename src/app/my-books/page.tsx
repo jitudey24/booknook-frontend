@@ -39,7 +39,7 @@ interface EditForm {
 const categories = ["Fiction", "Science", "History", "Kids", "Others"];
 
 const baseUrl = (
-  process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"
+  process.env.NEXT_PUBLIC_API_URL || ""
 ).replace(/\/+$/, "");
 
 // Get JWT token from BetterAuth

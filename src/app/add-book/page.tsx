@@ -24,9 +24,8 @@ import {
 const categories = ["Fiction", "Science", "History", "Kids", "Others"];
 
 const baseUrl = (
-  process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"
+  process.env.NEXT_PUBLIC_API_URL || ""
 ).replace(/\/+$/, "");
-
 const imgbbApiKey = process.env.NEXT_PUBLIC_IMGBB_API_KEY || "";
 
 // Get JWT token from BetterAuth

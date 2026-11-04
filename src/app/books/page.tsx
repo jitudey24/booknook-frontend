@@ -25,7 +25,7 @@ interface BooksResponse {
   data: Book[];
 }
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 /* Local placeholder — only used when a book image is missing or fails to load */
 const FALLBACK_IMAGE = "/images/book-cover-fallback.svg";
