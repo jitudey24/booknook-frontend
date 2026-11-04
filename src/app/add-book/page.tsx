@@ -31,19 +31,19 @@ const imgbbApiKey = process.env.NEXT_PUBLIC_IMGBB_API_KEY || "";
 
 // Get JWT token from BetterAuth
 
-// const getAuthHeaders = async () => {
-//   const { data, error } = await authClient.token();
+const getAuthHeaders = async () => {
+  const { data, error } = await authClient.token();
 
-//   if (error || !data?.token) {
-//     throw new Error(
-//       error?.message || "Authentication token not found. Please login again.",
-//     );
-//   }
+  if (error || !data?.token) {
+    throw new Error(
+      error?.message || "Authentication token not found. Please login again.",
+    );
+  }
 
-//   return {
-//     Authorization: `Bearer ${data.token}`,
-//   };
-// };
+  return {
+    Authorization: `Bearer ${data.token}`,
+  };
+};
 
 
 export default function AddBookPage() {
