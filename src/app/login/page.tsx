@@ -51,17 +51,17 @@ function LoginForm() {
     searchParams.get("callbackURL") || searchParams.get("redirect"),
   );
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm<LoginValues>({
-    resolver: zodResolver(loginSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-  });
+  // const {
+  //   register,
+  //   handleSubmit,
+  //   formState: { errors, isSubmitting },
+  // } = useForm<LoginValues>({
+  //   resolver: zodResolver(loginSchema),
+  //   defaultValues: {
+  //     email: "",
+  //     password: "",
+  //   },
+  // });
 
   const onSubmit = async (values: LoginValues) => {
     try {
