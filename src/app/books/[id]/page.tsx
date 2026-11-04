@@ -194,16 +194,16 @@ function BookDetailsContent() {
   }, [id, user, isPending, router, refreshKey]);
 
   // Set a meaningful dynamic page title
-  useEffect(() => {
-    if (book?.title) {
-      const previousTitle = document.title;
-      document.title = `${book.title} | BookNook`;
+  // useEffect(() => {
+  //   if (book?.title) {
+  //     const previousTitle = document.title;
+  //     document.title = `${book.title} | BookNook`;
 
-      return () => {
-        document.title = previousTitle;
-      };
-    }
-  }, [book]);
+  //     return () => {
+  //       document.title = previousTitle;
+  //     };
+  //   }
+  // }, [book]);
 
   // Open Borrow Modal
   const handleBorrow = () => {
