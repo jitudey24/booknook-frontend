@@ -94,9 +94,9 @@ const getAuthHeaders = async () => {
 };
 
 // Main Book Details Content
-// function BookDetailsContent() {
-//   const params = useParams();
-//   const router = useRouter();
+function BookDetailsContent() {
+  const params = useParams();
+  const router = useRouter();
 
   // Safely extract id
   const rawId = params?.id;
